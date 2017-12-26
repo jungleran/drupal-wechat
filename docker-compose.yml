@@ -31,6 +31,9 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./volumes/composer/cache:/composer/cache
+    entrypoint:
+      - bash
+    tty: true
 
   pma:
     image: phpmyadmin/phpmyadmin
