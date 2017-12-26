@@ -1,0 +1,6 @@
+/volumes/*
+!/volumes/apache
+!/volumes/mysql
+/volumes/mysql/*
+!/volumes/mysql/conf
+!/volumes/php
