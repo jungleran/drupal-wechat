@@ -1,0 +1,40 @@
+version: '2'
+services:
+
+  wechat7:
+    build: ./image/wechat
+    container_name: wechat7
+    volumes:
+      - ./volumes/wechat/src:/var/www/html
+      - ./volumes/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./volumes/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 80:80
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    container_name: db
+    hostname: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=wechat
+    volumes:
+      - ./volumes/mysql/conf:/etc/mysql/conf.d
+      - ./volumes/mysql/mysql:/var/lib/mysql
+      - ./volumes/mysql/mysqldump:/mysqldump
+
+  drush7:
+    build: ./image/drush
+    container_name: drush7
+    volumes_from:
+      - wechat7
+    working_dir: /var/www/html
+    volumes:
+      - ./volumes/composer/cache:/composer/cache
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    hostname: pma
+    ports:
+      - 81:80
