@@ -2,7 +2,7 @@ version: '2'
 services:
 
   wechat7:
-    build: ./image/wechat
+    image: drupal:7.56
     container_name: wechat7
     volumes:
       - ./volumes/wechat/src:/var/www/html
