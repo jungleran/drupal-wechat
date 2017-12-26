@@ -24,7 +24,7 @@ services:
       - ./volumes/mysql/mysqldump:/mysqldump
 
   drush7:
-    build: ./image/drush
+    image: drush/drush
     container_name: drush7
     volumes_from:
       - wechat7
